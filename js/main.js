@@ -5,27 +5,34 @@ let vidaDraco = 250;
 
 let round = 0;
 
-function calcularGolpe(){
+function calcularHechizo(){
     return Math.ceil(Math.random()*100);
 }
 
+function sigueLucha(){
+    return vidaHarry>0 && vidaDraco>0
+}
+
+function harryVive(){
+    return vidaHarry > 0
+}
 
 
-while(vidaHarry>0 && vidaDraco>0){ 
+while(sigueLucha()){ 
     round += 1;
     
-    //let echizoHarry = Math.ceil(Math.random()*100);
-    let echizoHarry = calcularGolpe()
-    //let echizoDraco = Math.ceil(Math.random()*100);
-    let echizoDraco = calcularGolpe()
+    let echizoHarry = calcularHechizo()
+    let echizoDraco = calcularHechizo()
     
     if(echizoHarry === echizoDraco){
         vidaDraco -= echizoHarry;
         vidaHarry-= echizoDraco;
     }else if(echizoHarry>echizoDraco){
         vidaDraco -=echizoHarry;
+        document.write('<img src="imagenes/harry.png" alt="HechizoHarry" width= "150" />') 
     }else{
         vidaHarry-= echizoDraco;
+        document.write('<img src="imagenes/draco.png" alt="HechizoDraco" width= "150" />') 
     }
     
     
@@ -41,8 +48,10 @@ while(vidaHarry>0 && vidaDraco>0){
 
 console.log("-----------------")
 
-if(vidaHarry > 0){
+if(harryVive()){
     console.log("VICTORIA HARRY POTTER")
+    document.write('<img src="imagenes/gryffindor.png" alt="Gryffindor gana" width= "200" />')
 }else{
     console.log("VICTORIA DRACO MALFOY")
+    document.write('<img src="imagenes/slytherin.png" alt="Slytherin gana" width= "200" />')
 }
